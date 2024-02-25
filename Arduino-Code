@@ -1,0 +1,46 @@
+//------------------MICROPHONE WIRING------------------
+// OUT -> Analog Pin A0
+int mPin = A0;
+// VCC -> 5V or 3.3V
+// GND -> GND
+
+//------------------LED WIRING------------------
+int ledPin = 9;  
+
+//----------------VARIABLES----------------
+int convertValue; 
+
+//----------------BUTTON----------------
+int buttonPin = 10; 
+int buttonState;
+bool buttonBool = false;
+
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() {  
+  convertValue = analogRead(mPin);  
+  
+  //voice > 10, LED on
+  if(convertValue>10){
+    digitalWrite(ledPin, HIGH);
+  }
+  Serial.print("mPin is ");
+  Serial.println(convertValue);
+
+  buttonState = digitalRead(buttonPin);
+
+  Serial.print("button is ");
+  Serial.println(buttonState);
+	
+//press the button, LED off
+  if(buttonState == LOW){
+    digitalWrite(ledPin, LOW);
+  }
+  delay(500);
+}
